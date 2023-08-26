@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 
  const connectedToDb=async ()=>{
     try{
-    const connection =await mongoose.connect("mongodb+srv://satyampayal10:jeemain1satyam@ultimate30augustlearn.nuqy2nh.mongodb.net/test1?retryWrites=true&w=majority")
+    const connection =await mongoose.connect(process.env.DATBASE_URL)
     if(connection){
         console.log("Connection to mongodb success ");
     }

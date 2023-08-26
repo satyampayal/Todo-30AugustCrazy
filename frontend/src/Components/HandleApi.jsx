@@ -29,14 +29,16 @@ const addTodo=(text,setText,setTodo)=>{
 
 
 }
-// not path created in backend
+// till path created in backend // complted path created 
 const updateTodo=(toDoId,text,setTodo,setText,setIsUpdating)=>{
    axios
    .post(`${baseUrl}/update`,{_id:toDoId,text})
-   .then(({data})=>{
+   .then((data)=>{
       //console.log(data);
+      setText("")
       setIsUpdating(false)
       getAllTodo(setTodo)
+
    }).catch(error=>console.log(error))
 
 

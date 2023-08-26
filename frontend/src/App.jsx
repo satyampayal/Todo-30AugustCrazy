@@ -2,24 +2,26 @@ import Logo from "./Components/Logo"
 //import Input from "./Components/Input";
 import TodoList from "./Components/TodoList";
 import { useState, useEffect } from "react";
-import { getAllTodo, addTodo,updateTodo,deletTodo} from "./Components/HandleApi";
+import { getAllTodo, addTodo, updateTodo, deletTodo } from "./Components/HandleApi";
 import axios from "axios";
 function App() {
+
    const [todo, setTodo] = useState([]);
    const [text, setText] = useState("");
-   const [isUpdating, setIsUpdating] = useState(false)
-   const [toDoId,setTodoId]=useState("")
+   const [isUpdating, setIsUpdating] = useState(false);
+   const [toDoId, setTodoId] = useState("");
    useEffect(() => {
       getAllTodo(setTodo);
    }, [])
 
-   const updateMode=(_id,text)=>{
+   const updateMode = (_id, text) => {
       setTodoId(_id)
-      setIsUpdating(true)
       setText(text);
+      setIsUpdating(true)
+
    }
 
-  
+
 
    return (
       <>
@@ -35,17 +37,19 @@ function App() {
             <button
                type="button"
 
-               onClick={  isUpdating?()=>    updateTodo(toDoId,text,setTodo,setText,setIsUpdating)   :   () => addTodo(text, setText, setTodo)}
-               className="bg-black px-[16px] py-[6px] text-white"
+               onClick={isUpdating ? () =>
+                  updateTodo(toDoId, text, setTodo, setText, setIsUpdating)
+                  : () => addTodo(text, setText, setTodo)}
+               className="bg-black  px-[16px] py-[6px] text-white"
             >
-             {isUpdating? 'Updating' :'ADD'}
+               {isUpdating ? 'Updating' : 'ADD'}
             </button>
          </div>
          {todo.map((item) => <TodoList
-          key={item._id} 
-          text={item.text} 
-          update={()=>updateMode(item._id,item.text)}
-          delet={()=>deletTodo(item._id,setTodo)} />)}
+            key={item._id}
+            text={item.text}
+            update={() => updateMode(item._id, item.text)}
+            delet={() => deletTodo(item._id, setTodo)} />)}
       </>
    )
 }
